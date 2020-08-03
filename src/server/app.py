@@ -1,14 +1,23 @@
 from flask import Flask, request, jsonify
 import requests as req
+from rq import Queue
+from rq.job import Job
+from worker import conn
+import redis
+
 app = Flask(__name__)
+r= redis.Redis()
+q = Queue(connection=r)
 
 def retrieveData(imageURL, videoURL):
     image = req.get(imageURL)
     video = req.get(videoURL)
     print('Done')
+    return 'hi'
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
+    from app import retrieveData
     # Retrieve the name from url parameter
     imageURL = request.args.get("image", None)
     videoURL = request.args.get("video", None)
@@ -28,10 +37,25 @@ def respond():
     # Now the user entered a valid name
     else:
         response["MESSAGE"] = f"Received correct video and image output"
-        retrieveData(imageURL, videoURL)
+        job = q.enqueue_call(
+            func=retrieveData, args=(imageURL,videoURL), result_ttl=5000
+        )
+        response["id"] = job.get_id()
+        print(job.get_id())
+
 
     # Return the response in json format
     return jsonify(response)
+
+@app.route('/getTime/<job_key>', methods=['GET'])
+def getTime(job_key):
+    job = Job.fetch(job_key, connection=conn)
+
+    if job.is_finished:
+        result = Result.query.filter_by(id=job.result).first()
+        return jsonify('Got smth')
+    else:
+        return "Nay!", 202
 
 # A welcome message to test our server
 @app.route('/')
