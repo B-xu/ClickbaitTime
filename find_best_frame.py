@@ -11,8 +11,8 @@ import time
 start = time.time() #start timing
 
 #load files/video
-gray = cv.imread('C:\\Users\\xy\\Documents\\thumb2.jpg', cv.IMREAD_GRAYSCALE)
-video_path = 'C:\\Users\\xy\\Downloads\\videoplayback-5.mp4'
+gray = cv.imread('C:\\Users\\xy\\Documents\\thumb1.jpg', cv.IMREAD_GRAYSCALE)
+video_path = 'C:\\Users\\xy\\Downloads\\videoplayback-1.mp4'
 
 bf = cv.BFMatcher() #feature matching object
 
@@ -39,7 +39,10 @@ while success:
             matches = []
         
         good = 0
-        for m,n in matches: #ratio test
+        for match in matches: #ratio test
+            if len((match)) < 2:
+                continue
+            m,n = match
             if m.distance < 0.75*n.distance:
                 good += 1
                 
@@ -61,7 +64,7 @@ if (best_match/len(kp) < 0.1): #no match condition
 minutes = int((best_fno/sample_rate_exact)//60)
 seconds = round((best_fno/sample_rate_exact)%60)
 
-print(str(minutes)+':'+str(seconds)) #time stamp
+print("%d:%02d" % (minutes,seconds)) #time stamp
 
 cv.imshow('best match',best_img)
 cv.imshow('original image', gray)
