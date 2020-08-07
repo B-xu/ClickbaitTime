@@ -34,7 +34,7 @@ def respond():
     # Now the user entered a valid name
     else:
         response["MESSAGE"] = f"Received correct video and image output"
-        job = q.enqueue_call(
+        job = q.enqueue(
             func=retrieveData, args=(imageURL,videoURL), result_ttl=5000
         )
         response["id"] = job.get_id()
