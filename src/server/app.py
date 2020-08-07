@@ -6,8 +6,7 @@ import redis
 from def_find_frame import find_frame
 
 app = Flask(__name__)
-r= redis.Redis()
-q = Queue(connection=r)
+q = Queue(connection=conn)
 
 def retrieveData(imageURL, videoURL):
     return find_frame(imageURL,videoURL)
