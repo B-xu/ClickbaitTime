@@ -7,6 +7,7 @@ Created on Wed Aug  5 12:29:35 2020
 
 import cv2 as cv
 import numpy as np
+from vidgear.gears import CamGear
 import urllib.request as urllib
 
 # url = 'https://i.ytimg.com/vi/oZmvn_fYWO4/mqdefault.jpg'
@@ -24,18 +25,22 @@ def find_frame(url, video_path):
     kp, des = sift.detectAndCompute(gray,None) #get keypoints of thumbnail
     
     
+    stream = CamGear(source=video_path)
+    sample_rate_exact = stream.framerate
+    sample_rate = round(sample_rate_exact)
     #get videocapture from video URL
-    cap = cv.VideoCapture(video_path) #get video
-    sample_rate_exact = cap.get(cv.CAP_PROP_FPS) #find frame rate 
-    sample_rate = round(sample_rate_exact) #rounded frame rate (for while loop)
-    success = cap.grab() # get the next frame
+    #cap = cv.VideoCapture(video_path) #get video
+    #sample_rate_exact = cap.get(cv.CAP_PROP_FPS) #find frame rate 
+    #sample_rate = round(sample_rate_exact) #rounded frame rate (for while loop)
+    #success = cap.grab() # get the next frame
+    success = stream.read()
     fno = 0 #frame number
     best_match = 0 #maximum number of matches
     best_fno = 0 #frame number of closes match
     
     while success:
         if fno % (sample_rate) == 0: #sample rate of about 1 frame per second
-            _, img = cap.retrieve()
+            img = success
             cmp = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
             kp1, des1 = sift.detectAndCompute(cmp,None)
             
@@ -58,15 +63,13 @@ def find_frame(url, video_path):
                 best_fno = fno
     
         fno += 1
-        success = cap.grab()
+        success = stream.read()
     
     cap.release()
     
     if (best_match/len(kp) < 0.1): #no match condition
         print("NO MATCH")
-    print(cap)
     print(sample_rate_exact)
-    print(cv.getBuildInformation())
     minutes = int((best_fno/sample_rate_exact)//60)
     seconds = round((best_fno/sample_rate_exact)%60)
     
