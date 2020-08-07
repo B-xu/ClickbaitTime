@@ -66,6 +66,7 @@ def find_frame(url, video_path):
         print("NO MATCH")
     print(cap)
     print(sample_rate_exact)
+    print(cv2.getBuildInformation())
     minutes = int((best_fno/sample_rate_exact)//60)
     seconds = round((best_fno/sample_rate_exact)%60)
     
