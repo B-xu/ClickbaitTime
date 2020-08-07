@@ -1,19 +1,16 @@
 from flask import Flask, request, jsonify
-import requests as req
 from rq import Queue
 from rq.job import Job
 from worker import conn
 import redis
+from def_find_frame import find_frame
 
 app = Flask(__name__)
 r= redis.Redis()
 q = Queue(connection=r)
 
 def retrieveData(imageURL, videoURL):
-    image = req.get(imageURL)
-    video = req.get(videoURL)
-    print('Done')
-    return 'hi'
+    return find_frame(imageURL,videoURL)
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
