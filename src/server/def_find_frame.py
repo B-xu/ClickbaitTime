@@ -64,6 +64,7 @@ def find_frame(url, video_path):
     
     if (best_match/len(kp) < 0.1): #no match condition
         print("NO MATCH")
+    print(cap)
     print(sample_rate_exact)
     minutes = int((best_fno/sample_rate_exact)//60)
     seconds = round((best_fno/sample_rate_exact)%60)
