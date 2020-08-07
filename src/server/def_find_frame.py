@@ -25,7 +25,7 @@ def find_frame(url, video_path):
     kp, des = sift.detectAndCompute(gray,None) #get keypoints of thumbnail
     
     
-    stream = CamGear(source=video_path)
+    stream = CamGear(source=video_path, y_tube=True).start()
     sample_rate_exact = stream.framerate
     sample_rate = round(sample_rate_exact)
     #get videocapture from video URL
