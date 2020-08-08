@@ -26,6 +26,7 @@ def find_frame(url, video_path):
     
     #get videocapture from video URL
     cap = cv.VideoCapture(video_path) #get video
+    print(cap.isOpened())
     sample_rate_exact = cap.get(cv.CAP_PROP_FPS) #find frame rate 
     sample_rate = round(sample_rate_exact) #rounded frame rate (for while loop)
     success = cap.grab() # get the next frame
