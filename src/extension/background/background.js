@@ -23,7 +23,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
 
 function findId(url){
     let index = url.indexOf('v=');
-    let id = url.slice(index+2);
+    let ampersandIndex = url.indexof('&');
+    let id = url.substring(index+2, ampersandIndex);
     return id;
 }
 

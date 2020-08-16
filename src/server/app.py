@@ -16,7 +16,9 @@ def respond():
     from app import retrieveData
     # Retrieve the name from url parameter
     imageURL = request.args.get("image", None)
-    videoURL = request.args.get("video", None)
+    requestString = request.query_string
+    videoIndex = requestString.find('video=')
+    videoURL = requestString.substring(videoIndex+6)
 
     # For debugging
     print(f"got image {imageURL}")
