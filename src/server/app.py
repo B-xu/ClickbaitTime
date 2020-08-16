@@ -11,14 +11,13 @@ q = Queue(connection=conn)
 def retrieveData(imageURL, videoURL):
     return find_frame(imageURL,videoURL)
 
-@app.route('/getmsg/', methods=['GET'])
-def respond():
+@app.route('/getmsg/<info>', methods=['GET'])
+def respond(info):
     from app import retrieveData
     # Retrieve the name from url parameter
     imageURL = request.args.get("image", None)
-    requestString = request.query_string
-    videoIndex = requestString.find('video=')
-    videoURL = requestString.substring(videoIndex+6)
+    videoIndex = info.find('video=')
+    videoURL = info.substring(videoIndex+6)
 
     # For debugging
     print(f"got image {imageURL}")
