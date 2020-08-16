@@ -45,9 +45,11 @@ def respond():
 def getTime(job_key):
     job = Job.fetch(job_key, connection=conn)
 
-    if job.is_finished:
-        result = Result.query.filter_by(id=job.result).first()
-        return jsonify('Got smth')
+    if job.is_finished:        
+        response = {}
+        result = job.result
+        response["time"] = result
+        return jsonify(response)
     else:
         return "Nay!", 202
 
