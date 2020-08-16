@@ -40,6 +40,7 @@ function fireLinksRequests(endpoint){
                 let videoURL = response.urls["160"];
                 console.log(videoURL);
                 // chrome.runtime.sendMessage({type:'video', value:videoURL});
+                videoURL = videoURL.replace('&','%26')
                 data.video = videoURL;
                 resolve(xhr.response);
             }
