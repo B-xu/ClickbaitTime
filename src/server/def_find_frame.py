@@ -20,7 +20,7 @@ def find_frame(url, video_path):
     gray = cv.imdecode(image, cv.IMREAD_GRAYSCALE)
     
     bf = cv.BFMatcher() #feature matching object
-    sift = cv.xfeatures2d.SIFT_create() #sift detection object
+    sift = cv.SIFT_create() #sift detection object
     kp, des = sift.detectAndCompute(gray,None) #get keypoints of thumbnail
     
     
