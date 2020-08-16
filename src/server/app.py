@@ -9,7 +9,7 @@ app = Flask(__name__)
 q = Queue(connection=conn)
 
 def retrieveData(imageURL, videoURL):
-    return find_frame(imageURL,videoURL)
+    return find_frame('sampleimage.jpg','samplevideo.mp4')
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
