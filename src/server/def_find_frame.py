@@ -15,8 +15,8 @@ video_path = 'https://r4---sn-nx5e6ne6.googlevideo.com/videoplayback?expire=1596
 def find_frame(url, video_path):
     
     #load the image from URL
-    resp = urllib.urlopen(url)
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")
+    # resp = urllib.urlopen(url)
+    # image = np.asarray(bytearray(resp.read()), dtype="uint8")
     gray = cv.imdecode(url, cv.IMREAD_GRAYSCALE)
     
     bf = cv.BFMatcher() #feature matching object
