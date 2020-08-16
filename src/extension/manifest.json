@@ -4,7 +4,8 @@
     "version": "1.0",
     "manifest_version": 2,
     "permissions":[
-        "tabs"
+        "tabs",
+        "https://imagematcher.herokuapp.com/"
     ],
     "browser_action":{
         "default_popup": "popup/popup.html",
