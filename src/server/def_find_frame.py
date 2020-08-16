@@ -17,7 +17,7 @@ def find_frame(url, video_path):
     #load the image from URL
     resp = urllib.urlopen(url)
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
-    gray = cv.imdecode(image, cv.IMREAD_GRAYSCALE)
+    gray = cv.imdecode(url, cv.IMREAD_GRAYSCALE)
     
     bf = cv.BFMatcher() #feature matching object
     sift = cv.xfeatures2d.SIFT_create() #sift detection object
