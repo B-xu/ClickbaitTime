@@ -45,10 +45,11 @@ def respond():
 def getTime(job_key):
     job = Job.fetch(job_key, connection=conn)
 
-    if job.is_finished:
-        print(job)
+    if job.is_finished:        
+        response = {}
         result = job.result
-        return jsonify(result)
+        response["time"] = result
+        return jsonify(response)
     else:
         return "Nay!", 202
 
