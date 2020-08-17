@@ -14,7 +14,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
     }).then(timestampStr=>{
         console.log(timestampStr);
         let timestampLink = generateTimestampLink(timestampStr,id);        
-        chrome.runtime.sendMessage({type:'time', link: timestampLink, timestamp:timestampStr});
+        // chrome.runtime.sendMessage({type:'time', link: timestampLink, timestamp:timestampStr});
+        chrome.tabs.create({"url": timestampLink});
         return;
     }).catch(error=>{
         console.error(error);

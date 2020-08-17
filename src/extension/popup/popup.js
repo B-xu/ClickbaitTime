@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded',()=>{
     document.querySelector('button').addEventListener('click',retrieveUrl,false);
-    chrome.runtime.onMessage.addListener((response,sender, sendResponse)=>{
-        if (response.type === 'time') {      
-            document.querySelector('.time').textContent = response.timestamp;
-            document.querySelector('.time').href=response.link;
-        }
-        return true;
-    })
+    // chrome.runtime.onMessage.addListener((response,sender, sendResponse)=>{
+    //     if (response.type === 'time') {      
+    //         document.querySelector('.time').textContent = response.timestamp;
+    //         document.querySelector('.time').href=response.link;
+    //     }
+    //     return true;
+    // })
 });
 
 function retrieveUrl(){
