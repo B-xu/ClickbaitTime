@@ -5,7 +5,8 @@
     "manifest_version": 2,
     "permissions":[
         "tabs",
-        "https://imagematcher.herokuapp.com/"
+        "https://imagematcher.herokuapp.com/",
+        "https://youtubeaudio.majorcadevs.com/api/"
     ],
     "browser_action":{
         "default_popup": "popup/popup.html",
