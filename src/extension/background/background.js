@@ -1,5 +1,6 @@
 let data={};
 chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
+    data = {};
     console.log(request.value)
     let id = findId(request.value);
     let thumbnailURL = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
@@ -9,22 +10,36 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
         return fireMessageRequest();
     }).then(jobId=>{
         console.log(jobId);
-
+        return pollJob(jobId);
     }).then(timestampStr=>{
+        console.log(timestampStr);
+        let timestampLink = generateTimestampLink(timestampStr,id);        
+        // chrome.runtime.sendMessage({type:'time', link: timestampLink, timestamp:timestampStr});
+        chrome.tabs.create({"url": timestampLink});
         return;
     }).catch(error=>{
         console.error(error);
     });
     // console.log(thumbnailURL);
-    // chrome.runtime.sendMessage({type:'image', value: thumbnailURL});
 
 })
+
+function generateTimestampLink(timestampStr,id){
+    let parts = timestampStr.split(':');
+    let totalTime = new Number(parts[0])*60 + new Number(parts[1]);
+    return `https://youtu.be/${id}?t=${totalTime}`;
+}
 
 
 function findId(url){
     let index = url.indexOf('v=');
     let ampersandIndex = url.indexOf('&');
-    let id = url.substring(index+2, ampersandIndex);
+    let id;
+    if (ampersandIndex === -1){
+        id = url.substring(index+2);
+    } else {
+        id = url.substring(index+2, ampersandIndex);
+    }
     return id;
 }
 
@@ -71,6 +86,30 @@ function fireMessageRequest(){
     });
 }
 
-function reqListener(){
-    
+function getTime(id){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            let endpoint = `https://imagematcher.herokuapp.com/getTime/${id}`;     
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", endpoint); 
+            xhr.onload = ()=>{
+                if (xhr.status !== 200 && xhr.status !== 202) {
+                    reject(xhr.statusText);
+                } else {
+                    resolve(xhr);
+                }
+            };
+        xhr.send();
+        }, 1000)
+    })
+}
+
+async function pollJob(jobid){
+    while(true){
+        let xhr = await getTime(jobid);
+        if (xhr.status === 200){
+            let response = JSON.parse(xhr.response);
+            return response.time;
+        }
+    }
 }
