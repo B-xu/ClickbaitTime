@@ -12,8 +12,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
         console.log(jobId);
         return pollJob(jobId);
     }).then(timestampStr=>{
-        console.log(timestampStr);        
-        chrome.runtime.sendMessage({type:'time', value: thumbnailURL});
+        console.log(timestampStr);
+        let timestampLink = generateTimestampLink(timestampStr,id);        
+        chrome.runtime.sendMessage({type:'time', link: timestampLink, timestamp:timestampStr});
         return;
     }).catch(error=>{
         console.error(error);
@@ -21,6 +22,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
     // console.log(thumbnailURL);
 
 })
+
+function generateTimestampLink(timestampStr,id){
+    let parts = timestampStr.split(':');
+    let totalTime = new Number(parts[0])*60 + new Number(parts[1]);
+    return `https://youtu.be/${id}?t=${totalTime}`;
+}
 
 
 function findId(url){
