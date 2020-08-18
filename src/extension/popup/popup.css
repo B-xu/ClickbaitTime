@@ -1,0 +1,15 @@
+button{
+    margin:8px;
+    margin-bottom: 10px;
+}
+.popup{
+    width:220px;
+    border: solid #DCDCDC 1px;
+}
+.text{
+    font-size: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    padding: 6px;
+    padding-top: 0;
+    padding-bottom: 10px;
+}

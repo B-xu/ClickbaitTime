@@ -1,12 +1,19 @@
 <!DOCTYPE html>
     <head>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="popup.css">
         <meta charset="utf-8">
         <title></title>
     </head>
     <body>
-        <button>Find Time</button>
-        <div>
-            <a class='time'></a>
+        <div class="popup">
+            <div class="sizing">
+                <button type="button" class="btn btn-outline-info btn-sm">Find Time</button>
+            </div>
+            <div class="text">
+                Click the button above on a Youtube page, and it'll open up the video at the thumbnail time in a new tab. No need to keep this popup open; the extension will run in the background.
+            </div>
         </div>
         
         <script src="popup.js" ></script>
