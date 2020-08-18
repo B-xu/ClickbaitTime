@@ -29,8 +29,8 @@ def findVideo(id):
     'logger': MyLogger(),
     'progress_hooks': [my_hook],
     }   
-    
+
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info('https://www.youtube.com/watch?v=id', download=False)
+        info_dict = ydl.extract_info('https://www.youtube.com/watch?v='+id, download=False)
         video_url = info_dict.get("url", None)
         return video_url
