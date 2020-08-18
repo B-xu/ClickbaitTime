@@ -16,7 +16,10 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
-ydl_opts = {
+
+
+def findVideo(id):
+    ydl_opts = {
     'format': 'worst',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
@@ -25,9 +28,9 @@ ydl_opts = {
     }],
     'logger': MyLogger(),
     'progress_hooks': [my_hook],
-}
-
-with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-    info_dict = ydl.extract_info('https://www.youtube.com/watch?v=BaW_jenozKc', download=False)
-    video_url = info_dict.get("url", None)
-    print(video_url)
+    }   
+    
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info('https://www.youtube.com/watch?v=id', download=False)
+        video_url = info_dict.get("url", None)
+        return video_url
