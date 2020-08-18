@@ -28,6 +28,6 @@ ydl_opts = {
 }
 
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-    info_dict = ydl.extract_info(['https://www.youtube.com/watch?v=BaW_jenozKc'], download=False)
+    info_dict = ydl.extract_info('https://www.youtube.com/watch?v=BaW_jenozKc', download=False)
     video_url = info_dict.get("url", None)
     print(video_url)
