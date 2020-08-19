@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
 function generateTimestampLink(timestampStr,id){
     let parts = timestampStr.split(':');
     let totalTime = new Number(parts[0])*60 + new Number(parts[1]);
-    return `https://youtu.be/${id}?t=${totalTime}&autoplay=0`;
+    return `https://youtu.be/${id}?t=${totalTime}`;
 }
 
 
