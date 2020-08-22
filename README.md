@@ -22,5 +22,5 @@ You can load the extension into your browser through the browser's extension too
 Navigate to a YouTube video of your choice and click on the extension. In the popup that opens, click "Find Time". It might take a few seconds for the new tab to load; during this time, you can navigate away or close the extension.
 
 ## Credits
-**Vincent Ji**: Implemented feature matching in OpenCV (Python) to find the best matching frame for the thumbnail in a given video.
+**Vincent Ji**: Implemented feature matching in OpenCV (Python) to find the best matching frame for the thumbnail in a given video.  
 **Bowen Xu**: Developed front-end chrome extension (JavaScript) to retrieve video data and created a RESTful API (Python) that calls feature matching functionality on a Heroku server.
