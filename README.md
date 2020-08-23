@@ -19,7 +19,7 @@ You can load the extension into your browser through the browser's extension too
   2. Click the `Load Temporary Add-on` button, navigate to the `src/extension/manifest.json` file, and click `Open`.
 
 ## Usage
-Navigate to a YouTube video of your choice and click on the extension. In the popup that opens, click "Find Time". It might take a few seconds for the new tab to load; during this time, you can navigate away or close the extension.
+Navigate to a YouTube video of your choice and click on the extension. In the popup that opens, click `Find Time`. It might take a few seconds for the new tab to load; during this time, you can navigate away or close the extension.
 
 ## Credits
 **Vincent Ji**: Implemented feature matching in OpenCV (Python) to find the best matching frame for the thumbnail in a given video.  
