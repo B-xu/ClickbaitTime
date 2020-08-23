@@ -12,11 +12,11 @@ You can load the extension into your browser through the browser's extension too
 
 - Chrome/Opera:
   1. Type `chrome://extensions` in your address bar to bring up the extensions page.
-  2. Enable developer mode (checkbox)
-  3. Click the "Load unpacked extension" button, navigate to the `src/extension` folder of your local extension instance, and click "Ok".
+  2. Enable developer mode (toggle).
+  3. Click the `Load unpacked extension` button, navigate to the `src/extension` folder of your local extension instance, and click `Ok`.
 - Firefox
   1. Type `about:debugging` in your address bar to bring up the add-ons page.
-  2. Click the `Load Temporary Add-on` button, navigate to the `src/extension/manifest.json` file, and click "Open".
+  2. Click the `Load Temporary Add-on` button, navigate to the `src/extension/manifest.json` file, and click `Open`.
 
 ## Usage
 Navigate to a YouTube video of your choice and click on the extension. In the popup that opens, click "Find Time". It might take a few seconds for the new tab to load; during this time, you can navigate away or close the extension.
