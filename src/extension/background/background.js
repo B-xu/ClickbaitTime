@@ -6,8 +6,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
     data.id = id;
     let thumbnailURL = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
     data.image = thumbnailURL;
-    fireLinksRequests(`https://youtubeaudio.majorcadevs.com/api/${id}/160`)
-    .then(()=>{
+    // fireLinksRequests(`https://youtubeaudio.majorcadevs.com/api/${id}/160`)
+    Promise.then(()=>{
         return fireMessageRequest();
     }).then(jobId=>{
         console.log(jobId);
@@ -71,7 +71,7 @@ function replaceAll(str, find, replace){
 
 function fireMessageRequest(){
     return new Promise((resolve,reject)=>{   
-        let endpoint = `https://imagematcher.herokuapp.com/getmsg/?image=${data.image}&video=${data.video}&id=${data.id}`;     
+        let endpoint = `https://imagematcher.herokuapp.com/getmsg/?image=${data.image}&id=${data.id}`;     
         let xhr = new XMLHttpRequest();
         xhr.open("GET", endpoint); 
         xhr.onload = ()=>{
