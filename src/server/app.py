@@ -17,12 +17,7 @@ def respond():
     from app import retrieveData
     # Retrieve the name from url parameter
     imageURL = request.args.get("image", None)
-    # videoURL = request.args.get("video", None)
     id = request.args.get("id", None)
-
-    # For debugging
-    # print(f"got image {imageURL}")
-    # print(f"got video {videoURL}")
 
     response = {}
 
