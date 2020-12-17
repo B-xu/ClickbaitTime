@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from rq import Queue
 from rq.job import Job
-from server.getVideoURL import findVideo
+from getVideoURL import findVideo
 from worker import conn
 import redis
 from def_find_frame import find_frame
