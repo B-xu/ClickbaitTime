@@ -6,22 +6,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=>{
     data.id = id;
     let thumbnailURL = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
     data.image = thumbnailURL;
-    fireLinksRequests(`https://youtubeaudio.majorcadevs.com/api/${id}/160`)
-    .then(()=>{
-        return fireMessageRequest();
-    }).then(jobId=>{
+    fireMessageRequest().then(jobId=>{
         console.log(jobId);
         return pollJob(jobId);
     }).then(timestampStr=>{
         console.log(timestampStr);
         let timestampLink = generateTimestampLink(timestampStr,id);        
-        // chrome.runtime.sendMessage({type:'time', link: timestampLink, timestamp:timestampStr});
         chrome.tabs.create({"url": timestampLink});
         return;
     }).catch(error=>{
         console.error(error);
     });
-    // console.log(thumbnailURL);
 
 })
 
@@ -55,7 +50,6 @@ function fireLinksRequests(endpoint){
                 let response = JSON.parse(xhr.response);
                 let videoURL = response.urls["160"];
                 console.log(videoURL);
-                // chrome.runtime.sendMessage({type:'video', value:videoURL});
                 videoURL = replaceAll(videoURL, '&', '%26');
                 data.video = videoURL;
                 resolve(xhr.response);
@@ -71,7 +65,7 @@ function replaceAll(str, find, replace){
 
 function fireMessageRequest(){
     return new Promise((resolve,reject)=>{   
-        let endpoint = `https://imagematcher.herokuapp.com/getmsg/?image=${data.image}&video=${data.video}&id=${data.id}`;     
+        let endpoint = `https://imagematcher.herokuapp.com/getmsg/?image=${data.image}&id=${data.id}`;     
         let xhr = new XMLHttpRequest();
         xhr.open("GET", endpoint); 
         xhr.onload = ()=>{
